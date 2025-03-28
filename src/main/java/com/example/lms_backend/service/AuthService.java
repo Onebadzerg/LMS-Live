@@ -1,3 +1,4 @@
+
 package com.example.lms_backend.service;
 
 import com.example.lms_backend.model.Member;
@@ -11,12 +12,12 @@ public class AuthService {
     @Autowired
     private MemberRepository memberRepository;
 
-    public Member login(String username, String password) {
-        Member user = memberRepository.findByMemberName(username);
-        if (user != null && user.getMemberPassword().equals(password)) {
-            return user;
+    public boolean authenticate(String memberName, String password) {
+        Member member = memberRepository.findByMemberName(memberName);
+        if (member != null && member.getMemberPassword().equals(password)) {
+            return true;
         }
-        return null;
+        return false;
     }
 
     public Member register(Member newMember) {
